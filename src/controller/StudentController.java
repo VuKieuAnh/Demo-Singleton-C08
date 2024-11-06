@@ -7,11 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StudentController {
-    public static List<Student> students = StudentStorage.readStudents();
+    static StudentStorage studentStorage = StudentStorage.getInstance();
+    public static List<Student> students = studentStorage.readStudents();
 
     public void add(Student student) {
         students.add(student);
-        StudentStorage.writeStudent(students);
+        studentStorage.writeStudent(students);
     }
 
 

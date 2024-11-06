@@ -5,9 +5,22 @@ import model.Student;
 import java.io.*;
 import java.util.List;
 
+//lop nay tao ra chi dung de goi phuong thuc.
+//co nhu cau tao 1 doi tuong duy nhat thuoc lop
+//dung singleton de tao class
 public class StudentStorage {
-//    ghi file: ghi ds student
-    public static void writeStudent(List<Student> students) {
+    private StudentStorage() {
+    }
+    private static StudentStorage instance;
+    public static StudentStorage getInstance() {
+        if (instance == null) {
+            instance = new StudentStorage();
+        }
+        return instance;
+    }
+
+    //    ghi file: ghi ds student
+    public void writeStudent(List<Student> students) {
 //        s.dat
         File file = new File("students.txt");
         try {
@@ -19,7 +32,7 @@ public class StudentStorage {
     }
 
 //    doc file
-    public static List<Student> readStudents() {
+    public List<Student> readStudents() {
         File file = new File("students.txt");
         try {
             ObjectInputStream os = new ObjectInputStream(new FileInputStream(file));
